@@ -4,6 +4,7 @@ import 'package:todo/core/theme/app_theme.dart';
 import 'package:todo/firebase_options.dart';
 
 import 'layout/home_layout.dart';
+import 'modules/update_task/update_task.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +27,10 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       title: 'To Do App',
       initialRoute: HomeLayout.routeName,
-      routes: {HomeLayout.routeName: (context) => HomeLayout()},
+      routes: {
+        HomeLayout.routeName: (context) => HomeLayout(),
+        UpdateTask.routeName: (context) => UpdateTask()
+      },
     );
   }
 }

@@ -39,6 +39,9 @@ dependencies:
   firebase_core: ^2.15.1
   cloud_firestore: ^4.9.1
   fluttertoast: ^8.2.2
+  calendar_timeline: ^1.1.2
+  provider: ^6.0.5
+  flutter_slidable: ^3.0.0
 
 dev_dependencies:
   flutter_test:
