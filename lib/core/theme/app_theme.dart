@@ -8,18 +8,24 @@ class AppTheme {
         backgroundColor: Color(0xFF5D9CEC),
         centerTitle: false,
         titleTextStyle: GoogleFonts.poppins(
-            fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
+          fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Color(0xFFFFFFFF),
+      type: BottomNavigationBarType.fixed,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      selectedIconTheme: IconThemeData(
+        color: Colors.blue,
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Color(0xFFFFFFFF),
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedIconTheme: IconThemeData(
-          color: Colors.blue,
-        ),
-        unselectedIconTheme: IconThemeData(color: Colors.grey),
-      ));
+      unselectedIconTheme: IconThemeData(color: Colors.grey),
+    ),
+    textTheme: TextTheme(
+      titleLarge: GoogleFonts.poppins(
+          fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+    ),
+    bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white),
+  );
 
   static ThemeData darkTheme = ThemeData(
       scaffoldBackgroundColor: Color(0xFF060E1E),
@@ -37,5 +43,10 @@ class AppTheme {
           color: Colors.blue,
         ),
         unselectedIconTheme: IconThemeData(color: Colors.grey),
-      ));
+      ),
+      textTheme: TextTheme(
+        titleLarge: GoogleFonts.poppins(
+            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+      ),
+      bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.black));
 }
