@@ -3,11 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
-      scaffoldBackgroundColor: Color(0xFFDFECDB),
-      appBarTheme: AppBarTheme(
-        backgroundColor: Color(0xFF5D9CEC),
-        centerTitle: false,
-        titleTextStyle: GoogleFonts.poppins(
+    canvasColor: Colors.white,
+    scaffoldBackgroundColor: Color(0xFFDFECDB),
+    appBarTheme: AppBarTheme(
+      backgroundColor: Color(0xFF5D9CEC),
+      centerTitle: false,
+      titleTextStyle: GoogleFonts.poppins(
           fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -28,6 +29,7 @@ class AppTheme {
   );
 
   static ThemeData darkTheme = ThemeData(
+      canvasColor: Color(0xFF141922),
       scaffoldBackgroundColor: Color(0xFF060E1E),
       appBarTheme: AppBarTheme(
           backgroundColor: Color(0xFF5D9CEC),

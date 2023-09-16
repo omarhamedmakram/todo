@@ -134,7 +134,9 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                             title: titleController.text,
                             details: detailsController.text,
                             date: selectedDate.toString(),
-                            time: selectedTime.toString());
+                            isDone: false,
+                            time:
+                                "${selectedTime.hour} : ${selectedTime.minute}");
                         MyDataBase.addTask(addTaskModel).then((value) {
                           Tost.tost("A task has been added");
                           Navigator.pop(context);
