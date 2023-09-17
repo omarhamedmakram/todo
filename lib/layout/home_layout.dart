@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo/layout/widget/add_task_bottom_sheet.dart';
 import 'package:todo/modules/settings_tab/setting_tab.dart';
 import 'package:todo/modules/task_tab/task_tab.dart';
-
 class HomeLayout extends StatefulWidget {
   static const String routeName = "HomeLayout";
 
@@ -12,12 +12,11 @@ class HomeLayout extends StatefulWidget {
 
 class _HomeLayoutState extends State<HomeLayout> {
   int selectedIndex = 0;
-
   List<Widget> Screan = [TaskTab(), SettingTab()];
-
   @override
   Widget build(BuildContext context) {
-    List<String> titleAppBar = ["To Do List", "Settings"];
+    var len = AppLocalizations.of(context);
+    List<String> titleAppBar = [len!.todo, len!.setting];
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
@@ -37,17 +36,21 @@ class _HomeLayoutState extends State<HomeLayout> {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         elevation: 0.0,
         shape: CircularNotchedRectangle(),
-        child: BottomNavigationBar(
-          currentIndex: selectedIndex,
-          onTap: (int index) {
-            setState(() {
-              selectedIndex = index;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.list), label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.settings), label: ""),
-          ],
+        child: Localizations.override(
+          context: context,
+          locale: Locale("en"),
+          child: BottomNavigationBar(
+            currentIndex: selectedIndex,
+            onTap: (int index) {
+              setState(() {
+                selectedIndex = index;
+              });
+            },
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.list), label: ""),
+              BottomNavigationBarItem(icon: Icon(Icons.settings), label: ""),
+            ],
+          ),
         ),
       ),
     );

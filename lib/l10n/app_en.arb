@@ -1,0 +1,10 @@
+{
+  "todo": "ToDoList",
+  "setting":"Settings",
+  "dark":"Dark",
+  "light":"Light",
+  "mode":"Theme",
+  "languge":"Languge",
+  "arabic":"Arabic",
+  "english":"English"
+}
