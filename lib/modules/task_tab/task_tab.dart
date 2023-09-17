@@ -17,23 +17,27 @@ class _TaskTabState extends State<TaskTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CalendarTimeline(
-          initialDate: selectedData,
-          firstDate: DateTime.now(),
-          lastDate: DateTime.now().add(Duration(days: 365)),
-          onDateSelected: (date) {
-            setState(() {
-              selectedData = date;
-            });
-          },
-          leftMargin: 20,
-          monthColor: Colors.blueGrey,
-          dayColor: Colors.teal[200],
-          activeDayColor: Colors.white,
-          activeBackgroundDayColor: Colors.redAccent[100],
-          dotsColor: Color(0xFF333A47),
-          selectableDayPredicate: (date) => date.day != 23,
-          locale: 'en_ISO',
+        Localizations.override(
+          context: context,
+          locale: Locale("en"),
+          child: CalendarTimeline(
+            initialDate: selectedData,
+            firstDate: DateTime.now(),
+            lastDate: DateTime.now().add(Duration(days: 365)),
+            onDateSelected: (date) {
+              setState(() {
+                selectedData = date;
+              });
+            },
+            leftMargin: 20,
+            monthColor: Colors.blueGrey,
+            dayColor: Colors.teal[200],
+            activeDayColor: Colors.white,
+            activeBackgroundDayColor: Colors.redAccent[100],
+            dotsColor: Color(0xFF333A47),
+            selectableDayPredicate: (date) => date.day != 23,
+            locale: 'en_ISO',
+          ),
         ),
         SizedBox(
           height: 6,
@@ -54,8 +58,10 @@ class _TaskTabState extends State<TaskTab> {
             }
             return Expanded(
               child: ListView.builder(
-                itemBuilder: (context, index) =>
-                    TaskItem(addTaskModel: tasks[index]),
+                itemBuilder: (context, index) => Localizations.override(
+                    context: context,
+                    locale: Locale("en"),
+                    child: TaskItem(addTaskModel: tasks[index])),
                 itemCount: tasks.length,
               ),
             );

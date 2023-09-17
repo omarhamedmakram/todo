@@ -23,8 +23,9 @@ class AppTheme {
     ),
     textTheme: TextTheme(
       titleLarge: GoogleFonts.poppins(
-          fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
-    ),
+            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+        labelLarge: GoogleFonts.poppins(
+            fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black)),
     bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white),
   );
 
@@ -47,8 +48,9 @@ class AppTheme {
         unselectedIconTheme: IconThemeData(color: Colors.grey),
       ),
       textTheme: TextTheme(
-        titleLarge: GoogleFonts.poppins(
-            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-      ),
+          titleLarge: GoogleFonts.poppins(
+              fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+          labelLarge: GoogleFonts.poppins(
+              fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white)),
       bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.black));
 }
