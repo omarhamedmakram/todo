@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:todo/core/net_work/firebase_detuitles/firebase_auth_function.dart';
+import 'package:todo/modules/login_screan/login_screan.dart';
 import 'package:todo/modules/settings_tab/provider/setting_provider.dart';
 
 import '../../core/cash_helper/cash_helper.dart';
@@ -140,6 +142,22 @@ class _SettingTabState extends State<SettingTab> {
                       });
                     })
               ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            padding: EdgeInsets.all(12),
+            color: theme.canvasColor,
+            child: TextButton(
+              child: Text(len!.signOut, style: theme.textTheme.labelLarge),
+              onPressed: () async {
+                FirebaseAuthFunction.SignOut();
+                await CashHelper.SetDate(key: "login", value: false);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, LoginScreen.routeName, (route) => false);
+              },
             ),
           ),
         ],

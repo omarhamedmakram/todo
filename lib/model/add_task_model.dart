@@ -4,11 +4,18 @@ class AddTaskModel {
   String? title;
   String? details;
   String? time;
-  String? date;
+  int? date;
   bool? isDone;
+  String userId;
 
   AddTaskModel(
-      {this.id, this.title, this.date, this.time, this.details, this.isDone});
+      {this.id,
+      this.title,
+      this.date,
+      this.time,
+      this.details,
+      this.isDone,
+      required this.userId});
 
   AddTaskModel.fromFireStore(Map<String, dynamic> json)
       : this(
@@ -17,7 +24,8 @@ class AddTaskModel {
             time: json["time"],
             date: json["date"],
             details: json["details"],
-            isDone: json["isDone"]);
+            isDone: json["isDone"],
+            userId: json["userId"]);
 
   Map<String, dynamic> toFireStore() {
     return {
@@ -26,7 +34,8 @@ class AddTaskModel {
       "time": time,
       "date": date,
       "details": details,
-      "isDone": isDone
+      "isDone": isDone,
+      "userId": userId
     };
   }
 }

@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Tost {
-  static void tost(String massage) {
+  static void ShowTost({
+    required String massage,
+    required ToastGravity toastGravity,
+    Color color = Colors.red,
+    Color textColor = Colors.white,
+  }) {
     Fluttertoast.showToast(
         msg: "${massage}",
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.TOP,
+        gravity: toastGravity,
         timeInSecForIosWeb: 2,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
+        backgroundColor: color,
+        textColor: textColor,
         fontSize: 16.0);
   }
 }

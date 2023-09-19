@@ -7,7 +7,11 @@ import 'package:todo/firebase_options.dart';
 import 'package:todo/modules/settings_tab/provider/setting_provider.dart';
 
 import 'core/cash_helper/cash_helper.dart';
+import 'core/cash_helper/sharedPrefrance_method.dart';
 import 'layout/home_layout.dart';
+import 'modules/login_screan/forget_password/forget_password.dart';
+import 'modules/login_screan/login_screan.dart';
+import 'modules/register_screen/register_screen.dart';
 import 'modules/update_task/update_task.dart';
 
 void main() async {
@@ -32,17 +36,19 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: CheekTheme(),
-
+      themeMode: SharedPrefrancMethod.CheekTheme(),
       //pro.currentTheme,
       title: 'To Do App',
-      initialRoute: HomeLayout.routeName,
+      initialRoute: SharedPrefrancMethod.CheekLogin(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: Locale(CheekLan()),
+      locale: Locale(SharedPrefrancMethod.CheekLan()),
       routes: {
         HomeLayout.routeName: (context) => HomeLayout(),
-        UpdateTask.routeName: (context) => UpdateTask()
+        UpdateTask.routeName: (context) => UpdateTask(),
+        RegisterScreen.routeName: (context) => RegisterScreen(),
+        LoginScreen.routeName: (context) => LoginScreen(),
+        ForgetPassword.routeName: (context) => ForgetPassword()
       },
     );
   }

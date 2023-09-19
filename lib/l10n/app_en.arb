@@ -6,5 +6,7 @@
   "mode":"Theme",
   "languge":"Languge",
   "arabic":"Arabic",
-  "english":"English"
+  "english":"English",
+  "signOut":"SignOut"
+
 }
