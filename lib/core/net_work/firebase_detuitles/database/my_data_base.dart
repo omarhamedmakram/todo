@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
-import '../../model/add_task_model.dart';
+import '../../../../model/add_task_model.dart';
 
 class MyDataBase {
   static CollectionReference<AddTaskModel> getCollection() {
@@ -21,9 +22,14 @@ class MyDataBase {
     doc.set(addTaskModel);
   }
 
-  static Stream<QuerySnapshot<AddTaskModel>> getTask() {
+  static Stream<QuerySnapshot<AddTaskModel>> getTask(
+      DateTime dateTime, String userId) {
     var collection = getCollection();
-    return collection.snapshots();
+    return collection
+        .where("userId", isEqualTo: userId)
+        .where("date",
+            isEqualTo: DateUtils.dateOnly(dateTime).millisecondsSinceEpoch)
+        .snapshots();
   }
 
   static Future<void> deleteTask(AddTaskModel taskModel) {

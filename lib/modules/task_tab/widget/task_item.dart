@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:todo/core/net_work/my_data_base.dart';
+import 'package:todo/core/net_work/firebase_detuitles/database/my_data_base.dart';
 import 'package:todo/model/add_task_model.dart';
 
 import '../../update_task/update_task.dart';
@@ -106,45 +107,47 @@ class _TaskItemState extends State<TaskItem> {
               Spacer(),
               widget.addTaskModel.isDone == true
                   ? TextButton(
-                      onPressed: () {
-                        setState(() {
-                          widget.addTaskModel.isDone = false;
-                          MyDataBase.UpdateTask(AddTaskModel(
-                            time: widget.addTaskModel.time,
+                onPressed: () {
+                  setState(() {
+                    widget.addTaskModel.isDone = false;
+                    MyDataBase.UpdateTask(AddTaskModel(
+                      time: widget.addTaskModel.time,
                             date: widget.addTaskModel.date,
                             details: widget.addTaskModel.details,
                             title: widget.addTaskModel.title,
                             id: widget.addTaskModel.id,
+                            userId: FirebaseAuth.instance.currentUser!.uid,
                             isDone: false,
                           )).then((value) {
-                            print("Update Task");
-                          });
-                        });
-                      },
-                      child: Text(
-                        "Done !",
-                        style: TextStyle(
-                            fontSize: 22,
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    )
+                      print("Update Task");
+                    });
+                  });
+                },
+                child: Text(
+                  "Done !",
+                  style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold),
+                ),
+              )
                   : ElevatedButton(
-                      onPressed: () {
-                        widget.addTaskModel.isDone = true;
+                  onPressed: () {
+                    widget.addTaskModel.isDone = true;
                         MyDataBase.UpdateTask(AddTaskModel(
                           time: widget.addTaskModel.time,
                           date: widget.addTaskModel.date,
                           details: widget.addTaskModel.details,
                           title: widget.addTaskModel.title,
                           id: widget.addTaskModel.id,
+                          userId: FirebaseAuth.instance.currentUser!.uid,
                           isDone: true,
                         )).then((value) {
                           print("Update Task");
                         });
                         setState(() {});
-                      },
-                      child: Icon(Icons.check))
+                  },
+                  child: Icon(Icons.check))
             ],
           ),
         ),

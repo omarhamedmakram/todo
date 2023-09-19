@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:todo/core/net_work/my_data_base.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:todo/core/net_work/firebase_detuitles/database/my_data_base.dart';
 import 'package:todo/core/service/toast.dart';
 import 'package:todo/model/add_task_model.dart';
 
@@ -98,7 +100,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 Container(
                   alignment: Alignment.topLeft,
                   child:
-                      Text("Selected Date", style: theme.textTheme.titleLarge),
+                      Text("Selected Time", style: theme.textTheme.titleLarge),
                 ),
                 SizedBox(
                   height: 8,
@@ -114,7 +116,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 Container(
                   alignment: Alignment.topLeft,
                   child:
-                      Text("Selected Time", style: theme.textTheme.titleLarge),
+                      Text("Selected Date", style: theme.textTheme.titleLarge),
                 ),
                 SizedBox(
                   height: 8,
@@ -125,8 +127,8 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     },
                     child: Text(
                       "${selectedDate.year} "
-                      "/${selectedDate.month} /"
-                      "${selectedDate.day}",
+                          "/${selectedDate.month} /"
+                          "${selectedDate.day}",
                       style: TextStyle(color: Colors.grey, fontSize: 20),
                       textDirection: TextDirection.rtl,
                     )),
@@ -138,18 +140,23 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                           AddTaskModel addTaskModel = AddTaskModel(
                               title: titleController.text,
                               details: detailsController.text,
-                              date: selectedDate.toString(),
+                              userId: FirebaseAuth.instance.currentUser!.uid,
+                              date: DateUtils.dateOnly(selectedDate)
+                                  .millisecondsSinceEpoch,
                               isDone: false,
                               time:
                                   "${selectedTime.hour} : ${selectedTime.minute}");
                           MyDataBase.addTask(addTaskModel).then((value) {
-                            Tost.tost("A task has been added");
+                            Tost.ShowTost(
+                              massage: "A task has been added",
+                              toastGravity: ToastGravity.TOP,
+                            );
                             Navigator.pop(context);
                           });
                         }
                       },
                       child:
-                          Text("Add Task", style: theme.textTheme.titleLarge)),
+                      Text("Add Task", style: theme.textTheme.titleLarge)),
                 )
               ],
             ),
@@ -174,10 +181,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
 
   ShowSelectedDatePicker() {
     showDatePicker(
-            context: context,
-            initialDate: selectedDate,
-            firstDate: DateTime.now(),
-            lastDate: DateTime.now().add(Duration(days: 365)))
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime.now(),
+        lastDate: DateTime.now().add(Duration(days: 365)))
         .then((value) {
       setState(() {
         if (value != null) {

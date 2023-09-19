@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../core/net_work/my_data_base.dart';
+import '../../core/net_work/firebase_detuitles/database/my_data_base.dart';
 import '../../core/service/toast.dart';
 import '../../model/add_task_model.dart';
 class UpdateTask extends StatefulWidget {
@@ -140,8 +142,8 @@ class _UpdateTaskState extends State<UpdateTask> {
                         },
                         child: Text(
                           "${selectedDate.year} "
-                          "/${selectedDate.month} /"
-                          "${selectedDate.day}",
+                              "/${selectedDate.month} /"
+                              "${selectedDate.day}",
                           style: TextStyle(color: Colors.grey, fontSize: 20),
                           textDirection: TextDirection.rtl,
                         )),
@@ -155,11 +157,17 @@ class _UpdateTaskState extends State<UpdateTask> {
                                   title: titleController.text,
                                   isDone: false,
                                   details: detailsController.text,
+                                  userId:
+                                      FirebaseAuth.instance.currentUser!.uid,
                                   time:
                                       "${selectedTime.hour} : ${selectedTime.minute}",
-                                  date: "${selectedDate}");
+                                  date: DateUtils.dateOnly(selectedDate)
+                                      .millisecondsSinceEpoch);
                               MyDataBase.UpdateTask(addTaskModel).then((value) {
-                                Tost.tost("Update Task ");
+                                Tost.ShowTost(
+                                  massage: "Update Task ",
+                                  toastGravity: ToastGravity.TOP,
+                                );
                                 Navigator.pop(context);
                               });
                             }
@@ -190,10 +198,10 @@ class _UpdateTaskState extends State<UpdateTask> {
 
   ShowSelectedDatePicker() {
     showDatePicker(
-            context: context,
-            initialDate: selectedDate,
-            firstDate: DateTime.now(),
-            lastDate: DateTime.now().add(Duration(days: 365)))
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime.now(),
+        lastDate: DateTime.now().add(Duration(days: 365)))
         .then((value) {
       setState(() {
         if (value != null) {
